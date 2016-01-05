@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">		
   <title>Fond extensible - version CSS</title>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:500|Inconsolata' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-  <link href='https://fonts.googleapis.com/css?family=Orbitron:900' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/animate.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.0.2/css/hover-min.css">
 </head>
@@ -16,11 +16,12 @@
       <span class="typed-text"></span>
       </div>
   <div class="social">
-    <span  style="visibility:hidden" class="twitter"><img class="hvr-bounce-in" src="img/social/twitter.png"></span>
-    <span style="visibility:hidden" class="linkedin"><img class="hvr-bounce-in" src="img/social/linkedin.png"></span>
-    <span style="visibility:hidden" class="medium"><img class="hvr-bounce-in" src="img/social/medium.png"></span>
-    <span style="visibility:hidden" class="github"><img class="hvr-bounce-in" src="img/social/github.png"></span>
-    <span style="visibility:hidden" class="instagram"><img class="hvr-bounce-in" src="img/social/instagram.png"</span>
+   <span style="visibility:hidden" class="tumblr"><a href="http://h4md1.tumblr.com/"><img class="hvr-bounce-in" src="img/social/tumblr.png" /></a></span>
+    <span style="visibility:hidden" class="twitter"><a href="https://twitter.com/killerwolf"><img class="hvr-bounce-in" src="img/social/twitter.png" alt="twitter" /></a></span>
+    <span style="visibility:hidden" class="linkedin"><a href="https://www.linkedin.com/in/hamdilaadhari"><img class="hvr-bounce-in" src="img/social/linkedin.png" alt="linkedin" /></a></span>
+    <span style="visibility:hidden" class="medium"><a href="https://medium.com/@killerwolf"><img class="hvr-bounce-in" src="img/social/medium.png" alt="medium" /></a></span>
+    <span style="visibility:hidden" class="github"><a href="https://github.com/killerwolf"><img class="hvr-bounce-in" src="img/social/github.png" alt="github" /></a></span>
+    <span style="visibility:hidden" class="instagram"><a href="https://www.instagram.com/hamdilaadhari/"><img class="hvr-bounce-in" src="img/social/instagram.png" /></a></span>
   </div>
   </div>
     <script src="js/jquery-2.1.4.min.js" ></script>
@@ -30,14 +31,15 @@
           $('#card .avatar').addClass('animated bounceInDown');
         $('#card .name').addClass('animated fadeInUp');        
         $('#card .avatar').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $('#card .avatar').removeClass('animated bounceInDown');
           $("#summary>.typed-text").typed({
-            strings: ["^500WEB developper^1000<br />Automation addict and ^1000 OSS evangelist."],
+            strings: ["^500Web developer^1000<br />Automation addict and ^1000 OSS evangelist."],
             typeSpeed: 0,
             callback: function(){
               $('#card .social').children().each(function(i){
                 
                 var that = this,pos = i;
-                setTimeout(function(){$(that).removeAttr('style').addClass('animated bounceIn'+(pos%2?'Up':'Down'))},i*400);
+                setTimeout(function(){$(that).removeAttr('style').addClass('animated bounceIn'+(pos%2?'Right':'Right'))},i*400);
               });
             }
           });
