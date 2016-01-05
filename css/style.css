@@ -1,13 +1,13 @@
 html { 
   margin:0;
   padding:0;
-  background: url(../img/bg.jpg) no-repeat center fixed; 
+  background: url(../img/bg2.jpg) no-repeat center fixed; 
   -webkit-background-size: cover; /* pour anciens Chrome et Safari */
   background-size: cover; /* version standardisée */
 }
 
 #card{
-  margin: 0 auto;
+  margin: 130px auto 0;
 text-align: center;
   color: white;
 }

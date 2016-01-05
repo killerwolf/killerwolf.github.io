@@ -27,16 +27,17 @@
     <script src="js/typed.min.js"></script>
     <script>
       $(function(){
-          $('#card .avatar').addClass('animated bounceInUp');
-        $('#card .name').addClass('animated fadeInDown');        
+          $('#card .avatar').addClass('animated bounceInDown');
+        $('#card .name').addClass('animated fadeInUp');        
         $('#card .avatar').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
           $("#summary>.typed-text").typed({
             strings: ["^500WEB developper^1000<br />Automation addict and ^1000 OSS evangelist."],
             typeSpeed: 0,
             callback: function(){
               $('#card .social').children().each(function(i){
-                var that = this;
-                setTimeout(function(){;$(that).removeAttr('style').addClass('animated bounceInRight')},i*400);
+                
+                var that = this,pos = i;
+                setTimeout(function(){$(that).removeAttr('style').addClass('animated bounceIn'+(pos%2?'Up':'Down'))},i*400);
               });
             }
           });
