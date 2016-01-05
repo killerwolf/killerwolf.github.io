@@ -1,3 +1,37 @@
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-moz-keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 @-webkit-keyframes shakeAndLaunch {
     0% {
         -webkit-transform: translate(2px, 1px) rotate(0deg);
@@ -586,7 +620,7 @@
         transform: translate(0px, 0px) rotate(0deg);
     }
 }
-@-webkit-keyframes shake {
+@-webkit-keyframes shakeit {
     0% {
         -webkit-transform: translate(2px, 1px) rotate(0deg);
     }
@@ -621,7 +655,7 @@
         -webkit-transform: translate(1px, -2px) rotate(-1deg);
     }
 }
-@-moz-keyframes shake {
+@-moz-keyframes shakeit {
     0% {
         -moz-transform: translate(2px, 1px) rotate(0deg);
     }
@@ -656,7 +690,7 @@
         -moz-transform: translate(1px, -2px) rotate(-1deg);
     }
 }
-@-o-keyframes shake {
+@-o-keyframes shakeit {
     0% {
         -o-transform: translate(2px, 1px) rotate(0deg);
     }
@@ -691,7 +725,7 @@
         -o-transform: translate(1px, -2px) rotate(-1deg);
     }
 }
-@keyframes shake {
+@keyframes shakeit {
     0% {
         transform: translate(2px, 1px) rotate(0deg);
     }
@@ -728,6 +762,7 @@
 }
 
 html {
+  height: 100%;
     margin: 0;
     padding: 0;
     background: url(../img/bg2.jpg) no-repeat center fixed;
@@ -737,7 +772,34 @@ html {
     /* version standardisée */
 }
 
-.rocketed{
+.Aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body{
+  height: 95%;
+}
+#card {
+    /*margin: 130px auto 0;*/
+    text-align: center;
+    color: white;
+}
+#card img {
+    z-index: 2000
+}
+
+.avatar img{
+  cursor: pointer;
+  cursor: hand;
+}
+.avatar img:hover {
+    animation-name: shakeit;
+    animation-duration: .4s;
+    animation-iteration-count: infinite;
+}
+.avatar img.rocketed{
     -webkit-animation-name: shakeAndLaunch;
     -webkit-animation-timing-function: cubic-bezier(0.07, 0.83, 0.9, 0.02);
     -webkit-animation-duration: 2s;
@@ -755,20 +817,6 @@ html {
     animation-duration: 2s;
     animation-iteration-count: 1;
 }
-#card {
-    margin: 130px auto 0;
-    text-align: center;
-    color: white;
-}
-#card img {
-    z-index: 2000
-}
-
-#card .avatar img:hover {
-    animation-name: shake;
-    animation-duration: .4s;
-    animation-iteration-count: infinite;
-}
 #card .name {
     -moz-animation-duration: 0.3s;
     -moz-animation-delay: 0.6s;
@@ -784,6 +832,7 @@ html {
 #summary {
     font-family: 'Inconsolata';
     font-size: 38px;
+  min-height: 37px;
     color: #FFFFFF;
     line-height: 37px;
 }
@@ -798,37 +847,4 @@ html {
     -webkit-animation: blink 0.7s infinite;
     -moz-animation: blink 0.7s infinite;
     animation: blink 0.7s infinite;
-}
-@keyframes blink {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-@-webkit-keyframes blink {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-@-moz-keyframes blink {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
 }

@@ -2,15 +2,15 @@
 <html>
 <head>
   <meta charset="UTF-8">		
-  <title>Fond extensible - version CSS</title>
+  <title>h4md1.fr</title>
   <link href='https://fonts.googleapis.com/css?family=Orbitron:500|Inconsolata' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
   <link rel="stylesheet" href="css/animate.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.0.2/css/hover-min.css">
 </head>
-<body>
+<body class="Aligner">
 <div id="card">
-  <div class="avatar"><img src="img/avatar/avatar@1x.png"></div> 
+  <div class="avatar"><img src="img/avatar/avatar@1x.png" alt="click me"></div> 
   <div class="name">h4md1</div>
     <div id="summary">
       <span class="typed-text"></span>
@@ -33,7 +33,7 @@
         $('#card .avatar').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
             $('#card .avatar').removeClass('animated bounceInDown');
           $("#summary>.typed-text").typed({
-            strings: ["^500Web developer^1000<br />Automation addict and ^1000 OSS evangelist."],
+            strings: ["Software engineer^1000 interested in <br />web technologies^1000, automation^1000 and opensource."],
             typeSpeed: 0,
             callback: function(){
               $('#card .social').children().each(function(i){
@@ -43,6 +43,12 @@
               });
             }
           });
+        });
+        $('#card .avatar img').click(function(){
+          $('#card .avatar img').addClass('rocketed');
+          setTimeout(function(){
+            $('#card .avatar img').removeClass('rocketed');
+          },2100);
         });
       });
     </script>
