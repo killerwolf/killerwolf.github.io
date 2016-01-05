@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">		
+  <title>Fond extensible - version CSS</title>
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:900' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.0.2/css/hover-min.css">
+</head>
+<body>
+<div id="card">
+  <div class="avatar"><img src="img/avatar/avatar@1x.png"></div> 
+  <div class="name">h4md1</div>
+    <div id="summary">
+      <span class="typed-text"></span>
+      </div>
+  <div class="social">
+    <span  style="visibility:hidden" class="twitter"><img class="hvr-bounce-in" src="img/social/twitter.png"></span>
+    <span style="visibility:hidden" class="linkedin"><img class="hvr-bounce-in" src="img/social/linkedin.png"></span>
+    <span style="visibility:hidden" class="medium"><img class="hvr-bounce-in" src="img/social/medium.png"></span>
+    <span style="visibility:hidden" class="github"><img class="hvr-bounce-in" src="img/social/github.png"></span>
+    <span style="visibility:hidden" class="instagram"><img class="hvr-bounce-in" src="img/social/instagram.png"</span>
+  </div>
+  </div>
+    <script src="js/jquery-2.1.4.min.js" ></script>
+    <script src="js/typed.min.js"></script>
+    <script>
+      $(function(){
+          $('#card .avatar').addClass('animated bounceInUp');
+        $('#card .name').addClass('animated fadeInDown');        
+        $('#card .avatar').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+          $("#summary>.typed-text").typed({
+            strings: ["^500WEB developper^1000<br />Automation addict and ^1000 OSS evangelist."],
+            typeSpeed: 0,
+            callback: function(){
+              $('#card .social').children().each(function(i){
+                var that = this;
+                setTimeout(function(){;$(that).removeAttr('style').addClass('animated bounceInRight')},i*400);
+              });
+            }
+          });
+        });
+      });
+    </script>
+  
+</body>
+</html>
