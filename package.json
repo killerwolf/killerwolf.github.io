@@ -2,6 +2,7 @@
   "name": "killerwolf.github.io",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://h4md1.fr",
   "dependencies": {
     "@icons-pack/react-simple-icons": "^10.0.0",
     "@testing-library/jest-dom": "^5.17.0",
