@@ -1,0 +1,91 @@
+---
+interface Action {
+  label: string;
+  href: string;
+  primary?: boolean;
+  external?: boolean;
+}
+
+interface Project {
+  name: string;
+  status: 'LIVE' | 'BUILDING';
+  copy: string;
+  actions: Action[];
+}
+
+// Repo URLs, the invoice homepage and the skills sentence come from github.com/killerwolf (gh repo view).
+const projects: Project[] = [
+  {
+    name: 'mcp-profiler-bundle',
+    status: 'LIVE',
+    copy: "An MCP server that gives AI coding agents access to Symfony's profiler data, so they debug with real request timings and queries. 5.7k installs on Packagist.",
+    // TODO(Hamdi): add a ChatWindow with a real mcp-profiler-bundle exchange (prompt + answer), see components/ChatWindow.md.
+    actions: [{ label: 'GitHub →', href: 'https://github.com/killerwolf/mcp-profiler-bundle', external: true }],
+  },
+  {
+    name: 'AI invoice transcription',
+    status: 'LIVE',
+    copy: 'Drop in JPG invoices, get clean text back. A Next.js app that transcribes invoices with Mistral AI, in batches.',
+    // TODO(Hamdi): add a ChatWindow (user = invoice thumbnail, AI = its transcribed text) from a real, anonymised invoice.
+    actions: [
+      { label: 'Try it →', href: 'https://ai-invoice-transcribe.h4md1.fr', primary: true, external: true },
+      { label: 'GitHub →', href: 'https://github.com/killerwolf/invoice-ai', external: true },
+    ],
+  },
+  {
+    name: 'skills',
+    status: 'LIVE',
+    copy: 'Claude Code skills I use day to day, packaged as a plugin marketplace so each one can be installed on its own.',
+    actions: [{ label: 'GitHub →', href: 'https://github.com/killerwolf/skills', external: true }],
+  },
+  {
+    name: 'This video',
+    status: 'LIVE',
+    copy: 'A 55-second stop-motion of my career switch, drawn frame by frame in JavaScript on a canvas, with ElevenLabs narration.',
+    actions: [{ label: 'Watch it →', href: '#video' }],
+  },
+];
+
+const tilts = ['hm-tilt-l1', 'hm-tilt-r1', 'hm-tilt-r1', 'hm-tilt-l1'];
+---
+
+<section id="work" class="sec">
+  <div class="wrap">
+    <h2 class="hm-headline">
+      <span class="hm-paper hm-label hm-label--display strip-lg hm-tilt-r1" data-reveal>GENAI WORK</span>
+    </h2>
+
+    <div class="work-grid">
+      {
+        projects.map((project, i) => (
+          <article class={`hm-paper card project ${tilts[i]}`} data-reveal>
+            <span
+              class={`hm-paper hm-paper--sm status ${project.status === 'LIVE' ? 'hm-paper--yellow' : ''}`}
+              style="--hm-tilt: -1.4deg"
+            >
+              {project.status}
+            </span>
+            <h3>{project.name}</h3>
+            <p>{project.copy}</p>
+            <div class="actions">
+              {project.actions.map((action) => (
+                <a
+                  class={`hm-button ${action.primary ? 'hm-button--primary' : ''}`}
+                  href={action.href}
+                  {...(action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {action.label}
+                </a>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="building">
+      <span class="hm-paper hm-label hm-label--mono hm-tilt-l" data-reveal>CURRENTLY BUILDING</span>
+      <p>An evaluation harness for prompts (cost and p95 latency per variant) and a RAG pipeline with a cost model.</p>
+    </div>
+  </div>
+</section>

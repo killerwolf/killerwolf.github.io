@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found · Hamdi Laadhari" path="/404.html" indexable={false}>
+  <main id="main" class="lost">
+    <div class="wrap lost__grid">
+      <div class="lost__copy">
+        <div class="stack">
+          <h1 class="hm-headline">
+            <span class="hm-paper hm-paper--red hm-label hm-label--display strip-lg hm-tilt-r1">THIS PAGE WENT OFF-PATH</span>
+          </h1>
+          <p class="narrator narrator--lg">Even the signpost doesn't know where this goes.</p>
+          <a class="hm-button hm-button--primary" href="/">Back to the story →</a>
+        </div>
+      </div>
+      <img
+        class="lost__char"
+        src="/assets/hamdi-no-cap.png"
+        alt="Hamdi as a cut-paper character without a cap, looking lost"
+        width="529"
+        height="700"
+      />
+    </div>
+  </main>
+</Base>

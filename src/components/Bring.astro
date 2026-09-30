@@ -1,0 +1,35 @@
+---
+const items = [
+  { tone: 'yellow', title: '16 years shipping production code', sub: 'Tech Lead on sites with millions of visits' },
+  { tone: 'pink', title: 'Scale, latency, caching, cost', sub: 'the hard part of putting LLMs in production' },
+  { tone: 'cyan', title: 'Already shipping GenAI tooling', sub: 'mcp-profiler-bundle · MCP server · 5.7k installs' },
+];
+---
+
+<section id="bring" class="sec">
+  <div class="wrap">
+    <h2 class="hm-headline">
+      <span class="hm-paper hm-label hm-label--display strip-lg hm-tilt-l1" data-reveal>WHAT I BRING</span>
+    </h2>
+    <ul class="checks">
+      {
+        items.map((item) => (
+          <li class={`hm-paper hm-paper--${item.tone} hm-check`} data-reveal>
+            <span class="hm-check__box" aria-hidden="true">
+              <svg viewBox="0 0 48 48" focusable="false">
+                <polyline class="tick" points="9,26 20,37 40,11" />
+              </svg>
+            </span>
+            <div>
+              <p class="hm-check__title">{item.title}</p>
+              <p class="hm-check__sub">{item.sub}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="hm-paper hm-paper--ink hm-label hm-label--display strip-md hm-tilt-r" data-reveal>
+      TECH DEPTH <span class="x">×</span> BUSINESS SENSE
+    </p>
+  </div>
+</section>

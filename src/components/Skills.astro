@@ -1,0 +1,47 @@
+---
+const groups = [
+  {
+    title: 'GENAI & ML',
+    items: ['LLM APIs', 'Prompt engineering', 'Model evaluation', 'MCP servers', 'Python', 'pandas & NumPy', 'scikit-learn', 'TensorFlow & Keras', 'SQL'],
+  },
+  {
+    title: 'PRODUCTION',
+    items: ['PHP & Symfony', 'TypeScript', 'Elasticsearch', 'Varnish', 'Redis', 'Microservices', 'REST APIs'],
+  },
+  {
+    title: 'SHIPPING',
+    items: ['AWS', 'Docker', 'GitLab CI/CD', 'Ansible', 'Linux', 'Automated testing', 'Git'],
+  },
+  { title: 'AGENTIC CODING', items: ['Claude Code', 'GitHub Copilot', 'MCP'] },
+  { title: 'BUSINESS', items: ['AI × marketing', 'Tech leadership'] },
+  { title: 'LANGUAGES', items: ['English (TOEIC 970)', 'French', 'Arabic'] },
+];
+const labelTilts = ['hm-tilt-l', 'hm-tilt-r', 'hm-tilt-l', 'hm-tilt-r', 'hm-tilt-l', 'hm-tilt-r'];
+---
+
+<section id="skills" class="sec">
+  <div class="wrap">
+    <h2 class="hm-headline">
+      <span class="hm-paper hm-label hm-label--display strip-lg hm-tilt-l1" data-reveal>SKILLS</span>
+    </h2>
+
+    <div class="skills">
+      {
+        groups.map((group, i) => (
+          <div class="skill-group">
+            <h3 class={`hm-paper hm-label hm-label--mono ${labelTilts[i]}`} data-reveal>
+              {group.title}
+            </h3>
+            <ul class="notes">
+              {group.items.map((item) => (
+                <li class="hm-paper hm-sticky" data-reveal>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
