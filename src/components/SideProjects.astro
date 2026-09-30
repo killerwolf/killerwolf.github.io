@@ -1,0 +1,130 @@
+---
+type Tool = 'claude' | 'copilot';
+
+interface SideProject {
+  slug: string;
+  name: string;
+  pitch: string;
+  tools: Tool[];
+  landing: string;
+  github: string;
+  store?: string;
+  shot: string;
+  alt: string;
+}
+
+// Pitches are the GitHub repo descriptions. Tools come from the repos: CLAUDE.md / AGENTS.md and
+// "Co-Authored-By: Claude" trailers (all three), "Co-authored-by: Copilot" trailers (WatchMe, QuickToss).
+const projects: SideProject[] = [
+  {
+    slug: 'watchme',
+    name: 'WatchMe',
+    pitch: 'A macOS menu bar app that watches running processes and tells you the moment one exits.',
+    tools: ['claude', 'copilot'],
+    landing: 'https://h4md1.fr/watchme/',
+    github: 'https://github.com/killerwolf/watchme',
+    shot: '/assets/side-projects/watchme.jpg',
+    alt: 'Screenshot of the WatchMe landing page: "Stop checking whether it\'s finished yet."',
+  },
+  {
+    slug: 'quicktoss',
+    name: 'QuickToss',
+    pitch: "Clean out a cluttered folder the way you'd swipe through a dating app: one file at a time, left to toss, right to keep.",
+    tools: ['claude', 'copilot'],
+    landing: 'https://h4md1.fr/QuickToss/',
+    github: 'https://github.com/killerwolf/QuickToss',
+    shot: '/assets/side-projects/quicktoss.jpg',
+    alt: 'Screenshot of the QuickToss landing page: "Your Downloads folder, cleared out in one sitting."',
+  },
+  {
+    slug: 'superscroll',
+    name: 'SuperScroll',
+    pitch: 'An advanced auto-scroll Chrome extension with customizable speed presets, keyboard shortcuts, and auto-pause.',
+    tools: ['claude'],
+    landing: 'https://h4md1.fr/chrome-extension-infinite-scroll/',
+    github: 'https://github.com/killerwolf/chrome-extension-infinite-scroll',
+    store: 'https://chromewebstore.google.com/detail/superscroll/lelhnakechcmiefkfbmkfdkpdjjeapem',
+    shot: '/assets/side-projects/superscroll.jpg',
+    alt: 'Screenshot of the SuperScroll landing page: "Scroll at exactly the speed you want."',
+  },
+];
+
+const tilts = ['hm-tilt-r1', 'hm-tilt-l1', 'hm-tilt-r1'];
+---
+
+<section id="side-projects" class="sec">
+  <div class="wrap">
+    <h2 class="hm-headline">
+      <span class="hm-paper hm-label hm-label--display strip-lg hm-tilt-l1" data-reveal>SIDE PROJECTS,</span>
+      <span class="hm-paper hm-label hm-label--display strip-lg hm-tilt-r" data-reveal style="animation-delay: 0.17s"
+        >BUILT WITH CODING AGENTS</span
+      >
+    </h2>
+
+    <div class="side-intro">
+      <p class="narrator narrator--lg">He doesn't only write code any more. He directs agents that write it, and reviews every line.</p>
+      <p class="hm-paper card hm-tilt-l1" data-reveal>
+        I build and maintain small products with Claude Code and GitHub Copilot: specs first, agents do the typing, I review,
+        test and ship. It's how I learn what these tools are good at, and where they need a senior engineer.
+      </p>
+    </div>
+
+    <div class="side-grid">
+      {
+        projects.map((project, i) => (
+          <article class="side" data-reveal>
+            <div class="hm-frame">
+              <img src={project.shot} alt={project.alt} width="1280" height="800" loading="lazy" />
+            </div>
+            <div class={`hm-paper card side__card ${tilts[i]}`}>
+              <h3>{project.name}</h3>
+              <p>{project.pitch}</p>
+              <div class="tag-row">
+                {project.tools.includes('claude') && (
+                  <span class="hm-paper hm-paper--sm hm-label hm-label--mono badge">CLAUDE CODE</span>
+                )}
+                {project.tools.includes('copilot') && (
+                  <span class="hm-paper hm-paper--sm hm-paper--ink hm-label hm-label--mono badge">GITHUB COPILOT</span>
+                )}
+              </div>
+              <div class="actions">
+                <a
+                  class="hm-button hm-button--primary"
+                  href={project.landing}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track="side-project"
+                  data-project={project.name}
+                  data-link-type="landing"
+                  data-section="side-projects">Landing page →</a
+                >
+                {project.store && (
+                  <a
+                    class="hm-button"
+                    href={project.store}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track="side-project"
+                    data-project={project.name}
+                    data-link-type="store"
+                    data-section="side-projects">Chrome Web Store →</a
+                  >
+                )}
+                <a
+                  class="hm-button"
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track="side-project"
+                  data-project={project.name}
+                  data-link-type="github"
+                  data-section="side-projects">GitHub →</a
+                >
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

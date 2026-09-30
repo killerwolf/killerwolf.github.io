@@ -1,0 +1,66 @@
+/* Cut-Paper Hamdi tokens — generated from tokens.json */
+:root {
+  --mat: #1f5a4a;
+  --mat-deep: #17493b;
+  --mat-grid: rgba(220,255,235,0.08);
+  --mat-grid-strong: rgba(220,255,235,0.20);
+  --mat-muted: #b9cdc4;
+  --paper: #f7f4ec;
+  --paper-white: #ffffff;
+  --ink: #10231d;
+  --ink-soft: #3d4f49;
+  --blue: #2f5cf5;
+  --red: #e4432d;
+  --yellow: #ffd23f;
+  --pink: #ff9ec7;
+  --cyan: #7fe3d6;
+  --kraft: #c99a5b;
+  --grey: #a9b2bb;
+  --grey-deep: #6f7a86;
+  --hoodie: #1f1f23;
+  --hoodie-light: #2b2b31;
+  --skin: #e0a47c;
+  --hair: #1c1512;
+  --laptop: #c9ccd1;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --radius-none: 0px;
+  --radius-device: 14px;
+  --radius-dot: 9999px;
+  --shadow-paper: 5px 8px 9px rgba(0,0,0,0.40);
+  --shadow-paper-sm: 3px 5px 5px rgba(0,0,0,0.35);
+  --shadow-button: 3px 4px 0 rgba(0,0,0,0.35);
+  --shadow-frame: 0 18px 40px rgba(0,0,0,0.45);
+  --tilt-0: 0deg;
+  --tilt-1: 0.6deg;
+  --tilt-2: 1.4deg;
+  --tilt-3: 2.3deg;
+  --tilt-4: 4deg;
+  --font-display: "Dela Gothic One", Impact, "Arial Black", sans-serif;
+  --font-hand: Kalam, "Comic Sans MS", cursive;
+  --font-mono: "DM Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+@font-face { font-family: 'Dela Gothic One'; font-weight: 400; font-display: swap; src: url('/fonts/DelaGothicOne-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Kalam'; font-weight: 400; font-display: swap; src: url('/fonts/Kalam-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Kalam'; font-weight: 700; font-display: swap; src: url('/fonts/Kalam-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'DM Mono'; font-weight: 400; font-display: swap; src: url('/fonts/DMMono-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'DM Mono'; font-weight: 500; font-display: swap; src: url('/fonts/DMMono-Medium.woff2') format('woff2'); }
+.display-xl { font-family: var(--font-display); font-size: 72px; line-height: 1.02; font-weight: 400; text-transform: uppercase; }
+.display-lg { font-family: var(--font-display); font-size: 48px; line-height: 1.05; font-weight: 400; text-transform: uppercase; }
+.display-md { font-family: var(--font-display); font-size: 32px; line-height: 1.1; font-weight: 400; }
+.display-sm { font-family: var(--font-display); font-size: 22px; line-height: 1.15; font-weight: 400; }
+.hand-lg { font-family: var(--font-hand); font-size: 32px; line-height: 1.2; font-weight: 700; }
+.hand-md { font-family: var(--font-hand); font-size: 22px; line-height: 1.4; font-weight: 400; }
+.hand-sm { font-family: var(--font-hand); font-size: 18px; line-height: 1.3; font-weight: 700; }
+.label { font-family: var(--font-mono); font-size: 13px; line-height: 1.3; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+.body { font-family: var(--font-mono); font-size: 16px; line-height: 1.65; font-weight: 400; }
+.body-sm { font-family: var(--font-mono); font-size: 14px; line-height: 1.55; font-weight: 400; }
+.code { font-family: var(--font-mono); font-size: 14px; line-height: 1.5; font-weight: 500; }

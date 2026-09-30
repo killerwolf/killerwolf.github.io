@@ -1,0 +1,49 @@
+---
+import { links } from '../data/site';
+---
+
+<section class="hero" id="top">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <div class="stack">
+        <p class="hm-paper hm-label hm-label--mono hm-tilt-l" data-reveal>HAMDI LAADHARI · AI ENGINEER</p>
+        <h1 class="hm-boil">
+          <span class="hm-paper hm-paper--red hm-label hm-label--display strip-md hm-tilt-l" data-reveal>From</span>
+          <span class="hm-paper hm-label hm-label--display strip-lg hm-tilt-r1" data-reveal style="animation-delay: 0.17s"
+            >software engineer</span
+          >
+          <span class="hm-paper hm-paper--red hm-label hm-label--display strip-md hm-tilt-r" data-reveal style="animation-delay: 0.34s">to</span>
+          <span class="hm-paper hm-paper--blue hm-label hm-label--display strip-xl hm-tilt-l1" data-reveal style="animation-delay: 0.5s"
+            >AI engineer</span
+          >
+        </h1>
+        <p class="narrator narrator--lg">Sixteen years of code… and one plot twist.</p>
+        <p class="hm-paper card hm-tilt-r1" data-reveal>
+          I spent 12 years keeping high-traffic media sites fast. Now I build with generative AI and put it into production.
+        </p>
+        <div class="actions">
+          <a
+            class="hm-button hm-button--primary"
+            href={links.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="linkedin"
+            data-section="hero">Let's connect →</a
+          >
+          <a class="hm-button" href={links.cv} target="_blank" rel="noopener" data-track="cv" data-section="hero"
+            >Download CV</a
+          >
+          <a class="hm-button hm-button--ghost" href="#video">Watch the 55-second story</a>
+        </div>
+      </div>
+    </div>
+    <img
+      class="hero__char"
+      data-mascot-slot
+      src="/assets/hamdi-ai-cap.png"
+      alt="Hamdi as a cut-paper character in the blue AI Engineer cap, black hoodie, laptop under his arm"
+      width="505"
+      height="700"
+    />
+  </div>
+</section>

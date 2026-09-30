@@ -1,0 +1,52 @@
+---
+import { links } from '../data/site';
+---
+
+<section id="contact" class="sec contact" data-mascot-hide>
+  <div class="wrap contact__grid">
+    <div class="contact__copy">
+      <div class="stack">
+        {/* TODO(Hamdi): confirm the internship start date with EPITA and replace "2027" (e.g. "SPRING 2027"). */}
+        <p class="hm-paper hm-paper--yellow hm-label hm-label--mono hm-tilt-l" data-reveal>OPEN TO A 6-MONTH INTERNSHIP · 2027</p>
+        <h2>
+          <span class="hm-paper hm-label hm-label--display strip-md hm-tilt-r" data-reveal>Looking for</span>
+          <span class="hm-paper hm-paper--blue hm-label hm-label--display strip-lg hm-tilt-l1" data-reveal style="animation-delay: 0.17s"
+            >Applied / Forward Deployed</span
+          >
+          <span class="hm-paper hm-label hm-label--display strip-md hm-tilt-r1" data-reveal style="animation-delay: 0.34s"
+            >AI Engineer roles</span
+          >
+        </h2>
+        <p class="narrator narrator--lg">Say hi. He's friendly.</p>
+        <p class="hm-paper card hm-tilt-l1" data-reveal>
+          I'm looking for a 6-month end-of-studies internship where GenAI meets production: shipping LLM features, evaluating
+          them and keeping them fast and affordable. Paris, anywhere in Europe, or remote.
+        </p>
+        <div class="actions">
+          <a
+            class="hm-button hm-button--primary"
+            href={links.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="linkedin"
+            data-section="contact">Message me on LinkedIn →</a
+          >
+          <a class="hm-button" href={links.cv} target="_blank" rel="noopener" data-track="cv" data-section="contact"
+            >Download CV</a
+          >
+        </div>
+        <p class="offkeys">
+          Runner, boulderer, and a freelance video and photo maker on the side, which is how this site ended up in stop-motion.
+        </p>
+      </div>
+    </div>
+    <img
+      class="contact__char"
+      src="/assets/hamdi-ai-cap-waving.png"
+      alt="Hamdi as a cut-paper character in the AI Engineer cap, waving"
+      width="672"
+      height="700"
+      loading="lazy"
+    />
+  </div>
+</section>

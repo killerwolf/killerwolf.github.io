@@ -1,0 +1,131 @@
+---
+import '../styles/tokens.css';
+import '../styles/cut-paper.css';
+import '../styles/site.css';
+import { GA_ID, SITE_URL, meta, personJsonLd } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+  indexable?: boolean;
+}
+
+const {
+  title = meta.title,
+  description = meta.description,
+  path = '/',
+  indexable = true,
+} = Astro.props;
+const canonical = `${SITE_URL}${path}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Hamdi Laadhari" />
+    <meta name="theme-color" content="#17493b" />
+    {indexable ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex" />}
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <link rel="preload" href="/fonts/DelaGothicOne-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/DMMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Kalam-Bold.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Hamdi Laadhari" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={meta.ogTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={meta.ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Cut-paper title frame: from software engineer to AI engineer" />
+    <meta property="profile:first_name" content="Hamdi" />
+    <meta property="profile:last_name" content="Laadhari" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={meta.ogTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={meta.ogImage} />
+
+    {indexable && <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />}
+
+    <script is:inline>document.documentElement.classList.add('js');</script>
+
+    {
+      GA_ID && (
+        <>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+          <script is:inline define:vars={{ GA_ID }}>
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () {
+              window.dataLayer.push(arguments);
+            };
+            window.gtag('js', new Date());
+            window.gtag('config', GA_ID);
+          </script>
+        </>
+      )
+    }
+  </head>
+  <body class="hm-mat">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+
+    <script>
+      // GA4 click events. Links opt in with data-track (+ data-section, data-project, data-link-type).
+      const EVENTS: Record<string, string> = {
+        linkedin: 'click_linkedin',
+        github: 'click_github',
+        devto: 'click_devto',
+        cv: 'download_cv',
+        'side-project': 'click_side_project',
+      };
+      document.addEventListener('click', (event) => {
+        const el = (event.target as Element).closest<HTMLElement>('[data-track]');
+        const name = el && EVENTS[el.dataset.track ?? ''];
+        if (!el || !name) return;
+        const params: Record<string, string> = { section: el.dataset.section ?? 'unknown' };
+        if (el.dataset.project) params.project = el.dataset.project;
+        if (el.dataset.linkType) params.link_type = el.dataset.linkType;
+        (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag?.('event', name, params);
+      });
+
+      // Stop-motion entrance: pieces pop in once when they scroll into view.
+      const pieces = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        pieces.forEach((p) => p.classList.add('is-in'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              const el = entry.target as HTMLElement;
+              el.classList.add('is-in', 'hm-pop');
+              io.unobserve(el);
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px' },
+        );
+        pieces.forEach((p) => io.observe(p));
+      }
+
+      // Video: starts muted, the ghost button plays it with sound.
+      const video = document.querySelector<HTMLVideoElement>('#story-video');
+      document.querySelector<HTMLButtonElement>('[data-play-sound]')?.addEventListener('click', () => {
+        if (!video) return;
+        video.muted = false;
+        void video.play();
+      });
+    </script>
+  </body>
+</html>
