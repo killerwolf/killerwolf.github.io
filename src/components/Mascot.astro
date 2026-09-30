@@ -1,0 +1,148 @@
+---
+---
+
+<div class="mascot" data-mascot aria-hidden="true">
+  <div class="mascot__body">
+    <img class="mascot__base" src="/assets/hamdi-capless.png" alt="" width="505" height="700" decoding="async" />
+    <img class="mascot__curl" src="/assets/hamdi-hair-curl.png" alt="" width="12" height="13" decoding="async" />
+    <img class="mascot__cap mascot__cap--software" src="/assets/hamdi-cap-software.png" alt="" width="317" height="134" decoding="async" />
+    <img class="mascot__cap mascot__cap--ai" src="/assets/hamdi-cap-ai.png" alt="" width="317" height="134" decoding="async" />
+  </div>
+</div>
+
+<script>
+  type Pose = [x: number, y: number, rotate: number, opacity: number];
+  type Shift = [x: number, y: number, rotate: number];
+  interface Frame { software: Pose; ai: Pose; curl: boolean; body: Shift }
+
+  const GONE: Pose = [0, 0, 0, 0];
+  const REST: Pose = [0, 0, 0, 1];
+  const STILL: Shift = [0, 0, 0];
+  const frame = (software: Pose, ai: Pose, curl = false, body: Shift = STILL): Frame => ({ software, ai, curl, body });
+
+  // One entry per stop-motion frame, scrubbed by scroll. Units are px of the 505x700 artwork.
+  const FRAMES: Frame[] = [
+    frame(REST, GONE),
+    frame([4, -14, 4, 1], GONE),
+    frame([16, -56, 12, 1], GONE),
+    frame([34, -118, 22, 1], GONE),
+    frame([56, -190, 32, 0.55], GONE),
+    frame(GONE, GONE, true, [0, 3, -1.4]),
+    frame(GONE, GONE, true, [0, 0, 1.4]),
+    frame(GONE, [-46, -200, -26, 1], true),
+    frame(GONE, [-34, -140, -18, 1]),
+    frame(GONE, [-20, -78, -10, 1]),
+    frame(GONE, [-7, -26, -3, 1]),
+    frame(GONE, [0, 7, 1, 1], false, [0, 3, 0]),
+    frame(GONE, [0, -3, 0, 1]),
+    frame(GONE, REST),
+  ];
+
+  const ART_W = 505;
+  const ART_H = 700;
+  const DOCK_PEEK = 0.6;
+  const root = document.documentElement;
+  const mascot = document.querySelector<HTMLElement>('[data-mascot]');
+  const slot = document.querySelector<HTMLElement>('[data-mascot-slot]');
+  const turn = document.querySelector<HTMLElement>('.signpost');
+
+  if (mascot && slot && turn) {
+    const body = mascot.querySelector<HTMLElement>('.mascot__body')!;
+    const curl = mascot.querySelector<HTMLElement>('.mascot__curl')!;
+    const capSoftware = mascot.querySelector<HTMLElement>('.mascot__cap--software')!;
+    const capAi = mascot.querySelector<HTMLElement>('.mascot__cap--ai')!;
+    const away = new Set<Element>();
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let lastFrame = -1;
+    let queued = false;
+    let active = false;
+
+    const clamp = (n: number, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, n));
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+    const place = (cap: HTMLElement, [x, y, rotate, opacity]: Pose) => {
+      cap.style.opacity = String(opacity);
+      cap.style.transform = `translate(${x}px, ${y}px) rotate(${rotate}deg)`;
+    };
+
+    const show = (index: number) => {
+      if (index === lastFrame) return;
+      lastFrame = index;
+      const f = FRAMES[index];
+      place(capSoftware, f.software);
+      place(capAi, f.ai);
+      curl.style.opacity = f.curl ? '1' : '0';
+      body.style.transform = `translate(${f.body[0]}px, ${f.body[1]}px) rotate(${f.body[2]}deg)`;
+      mascot.dataset.frame = String(index);
+    };
+
+    const update = () => {
+      queued = false;
+      const vw = root.clientWidth;
+      const vh = window.innerHeight;
+      const from = slot.getBoundingClientRect();
+
+      // Fly from the hero slot to a docked corner as the hero scrolls away.
+      const dockW = clamp(vw * 0.12, 104, 180);
+      const dockX = vw - dockW - 10;
+      const dockY = vh - dockW * (ART_H / ART_W) * DOCK_PEEK;
+      const travel = Math.max(1, (from.bottom + window.scrollY) * 0.8);
+      const t = clamp(window.scrollY / travel);
+      const e = t * t * (3 - 2 * t);
+      const x = lerp(from.left, dockX, e);
+      const y = lerp(from.top, dockY, e);
+      const scale = lerp(from.width, dockW, e) / ART_W;
+      mascot.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+
+      // Swap the cap while the signpost ("Same road / New path: AI") crosses the screen.
+      const r = turn.getBoundingClientRect();
+      const start = vh * 0.88;
+      const span = vh * 0.58 + r.height;
+      const p = clamp((start - r.top) / span);
+      show(Math.min(FRAMES.length - 1, Math.floor(p * FRAMES.length)));
+    };
+
+    const schedule = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) away.add(entry.target);
+          else away.delete(entry.target);
+        }
+        mascot.classList.toggle('is-away', away.size > 0);
+      },
+      { rootMargin: '-30% 0px -30% 0px' },
+    );
+    const hideWhileVisible = document.querySelectorAll('[data-mascot-hide]');
+
+    const enable = () => {
+      if (active) return;
+      active = true;
+      lastFrame = -1;
+      update();
+      root.classList.add('has-mascot');
+      window.addEventListener('scroll', schedule, { passive: true });
+      window.addEventListener('resize', schedule);
+      hideWhileVisible.forEach((el) => observer.observe(el));
+    };
+
+    const disable = () => {
+      if (!active) return;
+      active = false;
+      root.classList.remove('has-mascot');
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      observer.disconnect();
+      away.clear();
+    };
+
+    const sync = () => (reduceMotion.matches ? disable() : enable());
+    reduceMotion.addEventListener('change', sync);
+    sync();
+  }
+</script>

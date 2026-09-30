@@ -204,6 +204,24 @@ a { color: inherit; }
   .contact__char { justify-self: end; width: 230px; }
 }
 
+/* ---------- fixed mascot: hero art that follows the scroll and swaps its cap ---------- */
+.mascot {
+  display: none; position: fixed; left: 0; top: 0; z-index: 40; width: 505px; height: 700px;
+  transform-origin: 0 0; pointer-events: none; will-change: transform; transition: opacity 0.25s steps(3, jump-end);
+}
+.has-mascot .mascot { display: block; }
+.mascot.is-away { opacity: 0; }
+.mascot__body { position: absolute; inset: 0; }
+.mascot__body img { position: absolute; display: block; max-width: none; height: auto; user-select: none; }
+.mascot__base { left: 0; top: 0; width: 100%; }
+.mascot__cap { left: 34.257%; top: 1.286%; width: 62.772%; }
+.mascot__cap--ai { opacity: 0; }
+.mascot__curl { left: 79.802%; top: 8.571%; width: 2.376%; opacity: 0; }
+.has-mascot .hero__char { visibility: hidden; }
+.has-mascot .chapter { grid-template-columns: minmax(0, 1fr); }
+.has-mascot .chapter__char { display: none; }
+@media print { .mascot { display: none !important; } }
+
 /* ---------- footer ---------- */
 .footer { padding-block: var(--space-6); font: 400 14px/1.6 var(--font-mono); color: var(--mat-muted); }
 .footer__inner { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); align-items: center; }
