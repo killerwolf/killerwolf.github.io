@@ -12,7 +12,7 @@ export const links = {
 export const meta = {
   title: 'Hamdi Laadhari · AI Engineer (GenAI) · Software Engineer turned AI Engineer',
   description:
-    'Hamdi Laadhari: 16 years shipping production software, now an AI engineer focused on GenAI and LLMs. MSc AIMS at EPITA × EM Normandie.',
+    'Hamdi Laadhari: 16 years shipping production software, now an AI engineer focused on GenAI and LLMs. MSc AIMS at EPITA × EM Normandie. Open to a 6-month internship from March 2027.',
   ogTitle: 'From software engineer to AI engineer',
   ogImage: `${SITE_URL}/assets/og-frame-title.jpg`,
 } as const;
@@ -40,5 +40,4 @@ export const personJsonLd = {
   ],
 };
 
-// TODO(Hamdi): set PUBLIC_GA_MEASUREMENT_ID (G-XXXXXXXXXX) in the deploy workflow's repo variables.
 export const GA_ID: string | undefined = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || undefined;

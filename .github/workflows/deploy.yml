@@ -27,7 +27,6 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # TODO(Hamdi): add a repo variable GA_MEASUREMENT_ID (GA4 "G-XXXXXXXXXX"); analytics stays off without it.
           PUBLIC_GA_MEASUREMENT_ID: ${{ vars.GA_MEASUREMENT_ID }}
 
       - name: Deploy to GitHub Pages
