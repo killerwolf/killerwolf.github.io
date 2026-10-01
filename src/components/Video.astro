@@ -9,17 +9,24 @@
 
     <div class="video-grid">
       <div class="hm-frame">
+        {/* The 8 MB clip is not in the HTML until asked for: no bytes are transferred while the
+            visitor reads the text next to it. `preload="none"` + a poster keeps the box painted. */}
+        <button type="button" class="video-play" data-video-load aria-label="Play the video, sound on">
+          <img src="/assets/frame-title.jpg" alt="" width="1080" height="1350" loading="lazy" decoding="async" />
+          <span class="video-play__badge hm-paper hm-paper--yellow hm-tilt-r1">▶ PLAY — SOUND ON</span>
+        </button>
         <video
           id="story-video"
           controls
           muted
           playsinline
-          preload="metadata"
+          preload="none"
           poster="/assets/frame-title.jpg"
           width="1080"
           height="1350"
+          hidden
         >
-          <source src="/assets/hamdi-ai-reboot.mp4" type="video/mp4" />
+          <source data-src="/assets/hamdi-ai-reboot.mp4" type="video/mp4" />
           Your browser can't play this video. The transcript below tells the same story.
         </video>
       </div>

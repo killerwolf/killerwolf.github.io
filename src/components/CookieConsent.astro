@@ -1,0 +1,78 @@
+---
+import { links } from '../data/site';
+---
+
+{/* RGPD: Google Analytics is a non-essential measurement cookie under CNIL guidance, so it only
+    loads after an explicit opt-in. The choice is stored in localStorage and the tag is injected
+    at runtime — no GA script is present in the HTML until consent is granted. */}
+<aside class="consent" id="consent" data-consent hidden aria-labelledby="consent-title" role="dialog">
+  <div class="consent__card hm-paper hm-tilt-l1">
+    <h2 class="consent__title" id="consent-title">Cookies, briefly</h2>
+    <p class="consent__copy">
+      This site uses Google Analytics to see which sections actually help a visitor. No ad targeting, no selling data.{' '}
+      <a href={links.privacy}>Read the privacy policy</a>. Your choice is remembered on this device.
+    </p>
+    <div class="consent__actions">
+      <button type="button" class="hm-button hm-button--primary" data-consent-accept>Accept analytics</button>
+      <button type="button" class="hm-button" data-consent-refuse>Decline</button>
+    </div>
+  </div>
+</aside>
+
+<script>
+  import { GA_ID } from '../data/site';
+
+  const KEY = 'h4md1-consent';
+  const banner = document.querySelector<HTMLElement>('[data-consent]');
+
+  // Loads the GA4 tag. Called only after opt-in, so nothing is fetched beforehand.
+  const loadAnalytics = (id: string) => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+    window.gtag('js', new Date());
+    window.gtag('config', id);
+  };
+
+  const stored = (): string | null => {
+    try {
+      return localStorage.getItem(KEY);
+    } catch {
+      return null;
+    }
+  };
+
+  const remember = (value: 'granted' | 'denied') => {
+    try {
+      localStorage.setItem(KEY, value);
+    } catch {
+      /* private mode: the banner simply reappears on the next visit */
+    }
+  };
+
+  if (!banner) {
+    // No consent UI on this page: honour a previous opt-in, never invent one.
+    const choice = stored();
+    if (choice === 'granted' && GA_ID) loadAnalytics(GA_ID);
+  } else if (stored() === 'granted') {
+    if (GA_ID) loadAnalytics(GA_ID);
+  } else {
+    banner.hidden = false;
+    banner.querySelector('[data-consent-accept]')?.addEventListener('click', () => {
+      remember('granted');
+      banner!.hidden = true;
+      if (GA_ID) loadAnalytics(GA_ID);
+    });
+    banner.querySelector('[data-consent-refuse]')?.addEventListener('click', () => {
+      remember('denied');
+      banner!.hidden = true;
+    });
+  }
+</script>
+</content>
