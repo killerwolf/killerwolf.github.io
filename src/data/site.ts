@@ -1,4 +1,4 @@
-// Canonical host. The deck asks for www, but www.h4md1.fr currently 301s to the apex
+// Canonical host. www.h4md1.fr currently 301s to the apex, so the apex is what gets advertised.
 // (public/CNAME is the apex), so the apex is used for canonical, og:url, JSON-LD and the sitemap.
 export const SITE_URL = 'https://h4md1.fr';
 
@@ -7,13 +7,16 @@ export const links = {
   github: 'https://github.com/killerwolf',
   devto: 'https://dev.to/hamdi_laadhari',
   cv: '/cv/hamdi-laadhari-ai-engineer.pdf',
+  privacy: '/privacy/',
 } as const;
 
 export const meta = {
   title: 'Hamdi Laadhari · AI Engineer (GenAI) · Software Engineer turned AI Engineer',
   description:
     'Hamdi Laadhari: 16 years shipping production software, now an AI engineer focused on GenAI and LLMs. MSc AIMS at EPITA × EM Normandie. Open to a 6-month internship from March 2027.',
-  ogTitle: 'From software engineer to AI engineer',
+  // LinkedIn shows this text on a shared link, before anyone clicks. It has to carry the name,
+  // the role and the differentiator, not the tagline used on the page itself.
+  ogTitle: 'Hamdi Laadhari — AI Engineer (GenAI), 16 years of production software',
   ogImage: `${SITE_URL}/assets/og-frame-title.jpg`,
 } as const;
 
